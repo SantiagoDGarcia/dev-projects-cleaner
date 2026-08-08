@@ -1,0 +1,95 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.artifact }}
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.target == 'aarch64-pc-windows-msvc' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            target: aarch64-apple-darwin
+            bin: DevProjectsCleaner
+            artifact: DevProjectsCleaner-macos-arm64
+          - os: macos-15-intel
+            target: x86_64-apple-darwin
+            bin: DevProjectsCleaner
+            artifact: DevProjectsCleaner-macos-x86_64
+          - os: ubuntu-22.04
+            target: x86_64-unknown-linux-gnu
+            bin: DevProjectsCleaner
+            artifact: DevProjectsCleaner-linux-x86_64
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+            bin: DevProjectsCleaner
+            artifact: DevProjectsCleaner-linux-arm64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            bin: DevProjectsCleaner.exe
+            artifact: DevProjectsCleaner-windows-x86_64.exe
+          - os: windows-11-arm
+            target: aarch64-pc-windows-msvc
+            bin: DevProjectsCleaner.exe
+            artifact: DevProjectsCleaner-windows-arm64.exe
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          target: ${{ matrix.target }}
+
+      - name: Cache cargo
+        uses: swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Upload binary artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.artifact }}
+          path: target/${{ matrix.target }}/release/${{ matrix.bin }}
+          if-no-files-found: error
+
+  release:
+    name: Attach binaries to GitHub Release
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all binaries
+        uses: actions/download-artifact@v6
+        with:
+          path: release
+
+      - name: Flatten artifacts to their platform names
+        run: |
+          set -euo pipefail
+          cd release
+          for dir in */; do
+            name="${dir%/}"
+            file="$(find "$dir" -maxdepth 1 -type f | head -n1)"
+            tmp=".${name}.tmp"
+            mv "$file" "$tmp"
+            rmdir "$dir"
+            mv "$tmp" "$name"
+          done
+          ls -la
+
+      - name: Attach to GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: release/*
+          fail_on_unmatched_files: true

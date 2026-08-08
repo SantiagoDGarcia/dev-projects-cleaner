@@ -1,0 +1,60 @@
+{
+  "exclude": [".git", ".svn", ".hg"],
+  "patterns": [
+    { "names": ["__pycache__"], "kind": "dir", "description": "Python bytecode cache", "category": "Python" },
+    { "names": [".pytest_cache"], "kind": "dir", "description": "Pytest cache", "category": "Python" },
+    { "names": [".mypy_cache"], "kind": "dir", "description": "MyPy cache", "category": "Python" },
+    { "names": [".ruff_cache"], "kind": "dir", "description": "Ruff cache", "category": "Python" },
+    { "names": [".tox"], "kind": "dir", "description": "Tox environments", "category": "Python" },
+    { "names": ["venv", ".venv", "env"], "kind": "dir", "description": "Virtual environment", "category": "Python" },
+    { "names": ["*.egg-info"], "kind": "dir", "description": "Python package info", "category": "Python" },
+    { "names": [".coverage"], "kind": "file", "description": "Coverage data", "category": "Python" },
+    { "names": ["htmlcov"], "kind": "dir", "description": "Coverage report", "category": "Python" },
+    { "names": [".Python"], "kind": "file", "description": "Virtual env symlink", "category": "Python" },
+    { "names": ["*.pyc", "*.pyo", "*.pyd"], "kind": "file", "description": "Compiled Python files", "category": "Python" },
+
+    { "names": ["node_modules"], "kind": "dir", "description": "Node.js dependencies", "category": "Node" },
+    { "names": [".next"], "kind": "dir", "description": "Next.js build", "category": "Node" },
+    { "names": [".nuxt"], "kind": "dir", "description": "Nuxt.js build", "category": "Node" },
+    { "names": [".eslintcache"], "kind": "file", "description": "ESLint cache", "category": "Node" },
+    { "names": [".parcel-cache"], "kind": "dir", "description": "Parcel bundler cache", "category": "Node" },
+    { "names": ["*.tsbuildinfo"], "kind": "file", "description": "TypeScript build info", "category": "Node" },
+
+    { "names": [".dart_tool", "*.dart_tool"], "kind": "dir", "description": "Dart tooling cache", "category": "Dart/Flutter" },
+    { "names": [".packages"], "kind": "file", "description": "Dart package resolution cache", "category": "Dart/Flutter" },
+    { "names": [".flutter-plugins", ".flutter-plugins-dependencies"], "kind": "file", "description": "Flutter plugins marker", "category": "Dart/Flutter" },
+
+    { "names": ["target"], "kind": "dir", "description": "Build artifacts", "category": "Rust" },
+
+    { "names": ["vendor"], "kind": "dir", "scope": "root", "description": "Go vendor dependencies", "category": "Go" },
+
+    { "names": ["*.o", "*.obj"], "kind": "file", "description": "Compiled object files", "category": "C/C++" },
+
+    { "names": [".gradle"], "kind": "dir", "description": "Gradle cache", "category": "Java" },
+    { "names": ["*.class"], "kind": "file", "description": "Compiled Java classes", "category": "Java" },
+
+    { "names": ["Pods"], "kind": "dir", "description": "CocoaPods dependencies", "category": "iOS" },
+    { "names": [".build"], "kind": "dir", "description": "SwiftPM build artifacts", "category": "iOS" },
+
+    { "names": [".ipynb_checkpoints"], "kind": "dir", "description": "Jupyter checkpoints", "category": "Jupyter" },
+
+    { "names": ["*.blend1", "*.blend2", "*.blend3", "*.blend4"], "kind": "file", "description": "Blender backup", "category": "3D" },
+
+    { "names": [".terraform"], "kind": "dir", "description": "Terraform plugins/cache", "category": "Infra" },
+
+    { "names": [".idea"], "kind": "dir", "description": "IntelliJ IDEA config", "category": "IDE" },
+    { "names": [".history"], "kind": "dir", "description": "Shell/editor history", "category": "IDE" },
+    { "names": ["*~"], "kind": "file", "description": "Editor backup files", "category": "IDE" },
+    { "names": ["*.swp", "*.swo"], "kind": "file", "description": "Vim swap files", "category": "IDE" },
+
+    { "names": [".DS_Store"], "kind": "file", "description": "macOS folder metadata", "category": "OS" },
+    { "names": ["Thumbs.db"], "kind": "file", "description": "Windows thumbnail cache", "category": "OS" },
+    { "names": ["desktop.ini"], "kind": "file", "description": "Windows folder settings", "category": "OS" },
+
+    { "names": ["*.log"], "kind": "file", "description": "Log files", "category": "Logs" },
+
+    { "names": [".sass-cache"], "kind": "dir", "description": "Sass cache", "category": "CSS" },
+
+    { "names": ["dist", "build", "out"], "kind": "dir", "description": "Build output", "category": "Build" }
+  ]
+}

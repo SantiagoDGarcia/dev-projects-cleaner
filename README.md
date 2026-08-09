@@ -41,14 +41,15 @@ macOS (including Tahoe 26.6) may block the downloaded binary because it is not d
 
 Open your Terminal and execute the following command, replacing the path with the actual location of your downloaded file:
 
-````bash
+```bash
 xattr -cr /path/to/downloaded/DevProjectsCleaner-macos-arm64
+```
 
 ## 📖 Usage
 
 ```bash
 DevProjectsCleaner [OPTIONS] [PATH]
-````
+```
 
 Run it from inside a project, or point it at one:
 
@@ -77,7 +78,6 @@ Scanning /Users/you/code/my-api …
 Breakdown by category:
   Logs:        ████████████████████    5 items  25.0 B
   Rust:        ████                    1 item    2.0 B
-  Node:        ████                    1 item    2.0 B
 
 Where they are:
   ├── .DS_Store      [OS]  2.0 B  macOS folder metadata

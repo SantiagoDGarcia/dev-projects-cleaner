@@ -24,8 +24,7 @@ It is designed for developers who juggle multiple projects and want one safe, cr
 
 ### Prebuilt binaries
 
-Prebuilt binaries for macOS, Windows and Linux are included in [`bin/`](bin/)
-and are also attached to each [Release](https://github.com/<your-user>/dev-projects-cleaner/releases):
+Prebuilt binaries for macOS, Windows and Linux are attached in [Release](https://github.com/<your-user>/dev-projects-cleaner/releases):
 
 | Platform              | File                                                   |
 | --------------------- | ------------------------------------------------------ |
@@ -36,11 +35,20 @@ and are also attached to each [Release](https://github.com/<your-user>/dev-proje
 | Windows (x86_64)      | `DevProjectsCleaner-windows-x86_64.exe`                |
 | Windows (ARM64)       | `DevProjectsCleaner-windows-arm64.exe` _(built by CI)_ |
 
+#### macOS Gatekeeper bypass
+
+macOS (including Tahoe 26.6) may block the downloaded binary because it is not digitally signed. If you see a warning stating that Apple could not verify the app, you must remove the quarantine attribute.
+
+Open your Terminal and execute the following command, replacing the path with the actual location of your downloaded file:
+
+````bash
+xattr -cr /path/to/downloaded/DevProjectsCleaner-macos-arm64
+
 ## 📖 Usage
 
 ```bash
 DevProjectsCleaner [OPTIONS] [PATH]
-```
+````
 
 Run it from inside a project, or point it at one:
 
